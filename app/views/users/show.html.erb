@@ -1,0 +1,17 @@
+<% provide :title, @user.name %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+    <% unless @user.avatar.present? %>
+      <%= image_tag  "default-avater.png", size: "150x150", alt: "avatar" %>
+    <% else %>
+      <%= image_tag  @user.avatar, size: "150x150", alt: "avatar" %>
+    <% end %>
+      </br>
+      <ul>
+        <li>Name: <%= @user.name %></li>
+        <li>Email: <%= @user.email %></li>
+      <ul>
+    </section>
+  </aside>
+</div>

@@ -1,2 +1,15 @@
 en:
-  hello: "Hello world"
+  error_messages:
+    count: "The form contains "
+    mes: "errors"
+  users:
+    form:
+      name: "Name"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password confirmation"
+    new:
+      name: "Name"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password_confirmation"
