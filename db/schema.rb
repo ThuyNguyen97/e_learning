@@ -38,31 +38,31 @@ ActiveRecord::Schema.define(version: 2018_07_12_095003) do
     t.index ["category_id"], name: "index_courses_on_category_id"
   end
 
-  create_table "follow_courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "followcourses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_follow_courses_on_course_id"
-    t.index ["user_id"], name: "index_follow_courses_on_user_id"
+    t.index ["course_id"], name: "index_followcourses_on_course_id"
+    t.index ["user_id"], name: "index_followcourses_on_user_id"
   end
 
-  create_table "follow_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "followusers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "follower"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_follow_users_on_user_id"
+    t.index ["user_id"], name: "index_followusers_on_user_id"
   end
 
-  create_table "lession_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "lessionlogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.boolean "pass"
     t.bigint "user_id"
     t.bigint "lession_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lession_id"], name: "index_lession_logs_on_lession_id"
-    t.index ["user_id"], name: "index_lession_logs_on_user_id"
+    t.index ["lession_id"], name: "index_lessionlogs_on_lession_id"
+    t.index ["user_id"], name: "index_lessionlogs_on_user_id"
   end
 
   create_table "lessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -75,15 +75,15 @@ ActiveRecord::Schema.define(version: 2018_07_12_095003) do
     t.index ["course_id"], name: "index_lessions_on_course_id"
   end
 
-  create_table "question_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "lession_log_id"
+  create_table "questionlogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "lessionlog_id"
     t.bigint "question_id"
     t.bigint "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_question_logs_on_answer_id"
-    t.index ["lession_log_id"], name: "index_question_logs_on_lession_log_id"
-    t.index ["question_id"], name: "index_question_logs_on_question_id"
+    t.index ["answer_id"], name: "index_questionlogs_on_answer_id"
+    t.index ["lessionlog_id"], name: "index_questionlogs_on_lessionlog_id"
+    t.index ["question_id"], name: "index_questionlogs_on_question_id"
   end
 
   create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -113,14 +113,14 @@ ActiveRecord::Schema.define(version: 2018_07_12_095003) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "courses", "categories"
-  add_foreign_key "follow_courses", "courses"
-  add_foreign_key "follow_courses", "users"
-  add_foreign_key "follow_users", "users"
-  add_foreign_key "lession_logs", "lessions"
-  add_foreign_key "lession_logs", "users"
+  add_foreign_key "followcourses", "courses"
+  add_foreign_key "followcourses", "users"
+  add_foreign_key "followusers", "users"
+  add_foreign_key "lessionlogs", "lessions"
+  add_foreign_key "lessionlogs", "users"
   add_foreign_key "lessions", "courses"
-  add_foreign_key "question_logs", "answers"
-  add_foreign_key "question_logs", "lession_logs"
-  add_foreign_key "question_logs", "questions"
+  add_foreign_key "questionlogs", "answers"
+  add_foreign_key "questionlogs", "lessionlogs"
+  add_foreign_key "questionlogs", "questions"
   add_foreign_key "questions", "categories"
 end

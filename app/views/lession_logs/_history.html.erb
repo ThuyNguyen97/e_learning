@@ -1,0 +1,15 @@
+<fieldset disabled>
+	<% (0...@questionlogs.count).each do |i| %>
+		<div>
+			<b><%= i+1 %>. <%= @questions[i] %></b>
+			<% (0...@answers[i].count).each do |j| %>
+				<% next if @answer_ids[i][j] == 5 %>
+				<li class="answer">
+					<%= radio_button_tag nil,@answer_ids[i][j],
+						(true if  @questionlogs[i].answer_id==@answer_ids[i][j]) %>
+					<%= label_tag nil, @answers[i][j] %>
+				</li>
+			<% end %>
+		</div>
+	<% end %>
+</fieldset>
