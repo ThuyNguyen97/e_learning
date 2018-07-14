@@ -1,0 +1,23 @@
+<div class="activities">
+	<ul>
+		<% (0...@lessions.count).each do |i| %>
+			<% unless @lessionlogs[i].pass.nil? %>
+				<li>
+					<span class="lession">
+						<%= link_to "Lession: #{@lessions[i]}",
+							"/lessionlogs/#{@lessionlogs[i].id}" %>
+					</span>
+					<span class="created">
+						<%= @lessionlogs[i].created_at.strftime(
+								"Created on %m/%d/%Y %H:%M") %>
+					</span>
+					<% if @lessionlogs[i].pass %>
+						<span class="result true">Pass</span>
+					<% else %>
+						<span class="result false">Failed</span>
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>

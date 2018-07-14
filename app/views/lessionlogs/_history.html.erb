@@ -1,0 +1,26 @@
+<fieldset disabled>
+
+	<% (0...@questionlogs.count).each do |i| %>
+		<div>
+			<b><%= i+1 %>. <%= @questions[i] %></b>
+
+			<% if @questionlogs[i].answer_id == @corrects[i] %>
+				<span class="result correct">correct</span>
+			<% else %>
+				<span class="result uncorrect">uncorrect</span>
+			<% end %>
+			<% (0...@answers[i].count).each do |j| %>
+				<% next if @answer_ids[i][j] == 5 %>
+				<li class="answer">
+					<%= radio_button_tag nil,@answer_ids[i][j],
+						(true if @questionlogs[i].answer_id==@answer_ids[i][j]) %>
+					<% if @answer_ids[i][j]==@corrects[i] %>
+						<%= label_tag nil, @answers[i][j], class: "bold-style" %>
+					<% else %>
+						<%= label_tag nil, @answers[i][j] %>
+					<% end %>
+				</li>
+			<% end %>
+		</div>
+	<% end %>
+</fieldset>

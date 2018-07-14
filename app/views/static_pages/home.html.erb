@@ -8,5 +8,6 @@
     <%= link_to t("signup"), signup_path, class: "btn btn-lg btn-primary" %>
   <% else %>
     <%= link_to t("profile"), profile_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Start lession", lessionlogs_path, method: :post, class: "btn btn-lg btn-primary" %>
   <% end %>
 </div>

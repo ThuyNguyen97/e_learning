@@ -4,6 +4,7 @@
 $gray: #777;
 $white: #fff;
 $black: black;
+$black-light: #333;
 $gray-black: #222;
 $green: #003300;
 $red: red;
@@ -167,4 +168,90 @@ footer ul li {
 .img-size-small {
   width: 40px;
   height: 40px;
+}
+
+.answer {
+  list-style: none;
+  font-style: none;
+  
+  label {
+    font-weight: 100;
+  }
+}
+
+.activities {
+  width: 40%;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  clear: both;
+  position: relative;
+  top: -270px;
+  left: 250px;
+  ul {
+    list-style: none;
+
+    li{
+      border-bottom: 1px solid $gray;
+
+      .lession {
+        font-size: 1.32em;
+        font-weight: bold;
+        padding-right: 20px;
+        padding-left: 10px;
+
+        a {
+          color: $gray-black;
+          text-decoration: none;
+
+          &:hover {
+            color: $black-light;
+          }
+        }
+      }
+
+      .created {
+        font-size: 0.8em;
+        font-style: italic;
+        color: $black-light;
+        padding-right: 20px
+      }
+
+      .result {
+        display: inline-block;
+        border-radius: 5px;
+        color: $white;
+        font-weight: 700;
+        padding: 0 5px;
+        margin: 2px 0 2px 30px;
+      }
+
+      .true{
+        background: #339933;
+      }
+
+      .false {
+        background: #cc2900;
+      }
+    }
+  }
+}
+
+.result {
+  display: inline-block;
+  border-radius: 5px;
+  color: $white;
+  font-weight: 500;
+  padding: 0 5px;
+}
+
+.correct {
+  background: #339933 !important;
+}
+
+.uncorrect {
+  background: #cc2900 !important;
+}
+
+.bold-style {
+  font-weight: bold !important;
 }

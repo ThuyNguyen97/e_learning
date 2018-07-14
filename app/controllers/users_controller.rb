@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def index
-    @users = User.paginate page: params[:page], per_page: 20
+    if current_user
+      @users = User.paginate page: params[:page], per_page: 20
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -8,8 +12,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user? current_user
+    if current_user
       @user = current_user
+      @lessionlogs = @user.lessionlogs.order created_at: :desc
+      @lessions = []
+
+      @lessionlogs.each do |lessionlog|
+        @lessions << lessionlog.lession.name
+      end
     else
       redirect_to root_path
     end

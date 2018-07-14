@@ -1,0 +1,22 @@
+<div class="container margin-top-100">
+	<%= form_for :questionlog, method: :patch do |f| %>
+		<% if @flag_pass.nil? %>
+			<% (0...@questionlogs.count).each do |i| %>
+				<div>
+					<b><%= i+1 %>. <%= @questions[i] %></b>
+					<% (0...@answers[i].count).each do |j| %>
+						<% next if @answer_ids[i][j] == 5 %>
+						<li class="answer">
+							<%= f.radio_button @questionlogs[i].id, @answer_ids[i][j] %>
+							<%= f.label "#{@questionlogs[i].id}_#{@answer_ids[i][j]}",
+								@answers[i][j] %>
+						</li>
+					<% end %>
+				</div>
+			<% end %>
+			<%= f.submit "Finish", class: "btn btn-primary" %>
+		<% else %>
+			<%= render "history" %>
+		<% end %>
+	<% end %>
+</div>
