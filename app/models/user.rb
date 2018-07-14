@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
 
-  has_many :follow_users, dependent: :destroy
-  has_many :follow_courses, dependent: :destroy
-  has_many :lession_logs, dependent: :destroy
-  has_many :question_logs, through: :lession_logs, dependent: :destroy
+  has_many :followUsers, dependent: :destroy
+  has_many :followCourses, dependent: :destroy
+  has_many :lessionLogs, dependent: :destroy
+  has_many :questionLogs, through: :lession_logs, dependent: :destroy
 
   before_save :downcase_email
   USER_ATTRS = %w(name email password password_confirmation).freeze
