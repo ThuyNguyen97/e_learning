@@ -17,4 +17,12 @@ class LessionLogsController < ApplicationController
     @lessionlog.create_lessionlog
     redirect_to @lessionlog
   end
+
+  def update
+    @lessionlog = LessionLog.find_by id: params[:id]
+    @questionlogs = params[:questionlog]
+
+    @lessionlog.update_result @questionlogs
+    redirect_to profile_path
+  end
 end
