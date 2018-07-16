@@ -3,7 +3,7 @@ class LessionLog < ApplicationRecord
   belongs_to :lession
   has_many :question_logs, dependent: :destroy
 
-  def create_lessionlog
+  def create_lession_log
     category = lession.course.category
     @questions = category.questions.order("RAND()").first Settings.lession.page
 
@@ -13,15 +13,14 @@ class LessionLog < ApplicationRecord
     end
   end
 
-  def update_result questionlogs
-    @questionlog_ids = questionlogs.keys
-    @total = @questionlog_ids.count
+  def update_result question_logs
+    @total = question_logs.keys.count
     @correct = 0
 
-    @questionlog_ids.each do |questionlog_id|
-      queslog = QuestionLog.find_by id: questionlog_id
-      queslog.update_attributes answer_id: questionlogs[questionlog_id]
-      @correct += 1 if queslog.answer.correct == true
+    question_logs.keys.each do |question_log_id|
+      quesstion_log = QuestionLog.find_by id: question_log_id
+      quesstion_log.update_attributes answer_id: question_logs[question_log_id]
+      @correct += 1 if quesstion_log.answer.correct
     end
 
     if (@correct * 1.0 / @correct) > 0.8
@@ -32,13 +31,13 @@ class LessionLog < ApplicationRecord
   end
 
   class << self
-    def get_lessionlog question_logs
+    def get_lession_log question_logs
       @questions = []
       @answers = []
 
       question_logs.each do |question_log|
-        @questions << question_log.question
-        @answers << question_log.question.answers.order("RAND()")
+        @questions.push question_log.question
+        @answers.push question_log.question.answers.order("RAND()")
       end
 
       [@questions, @answers]

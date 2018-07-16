@@ -64,6 +64,10 @@ en:
       password_confirmation: "Password_confirmation"
       save: "Save changes"
       avatar: "Avatar"
+    activities:
+      created: "Created at "
+      pass: "Pass"
+      failed: "Failed"
   categories:
     create:
       success: "Created successfull"
@@ -165,3 +169,6 @@ en:
   lession_logs:
     show:
       finish: "Finish"
+    history:
+      correct: "correct"
+      uncorrect: "uncorrect"
