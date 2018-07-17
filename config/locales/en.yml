@@ -2,7 +2,7 @@ en:
   manage: "Manage"
   admin_access: "You don't have access"
   save: "Save"
-  Finish: "Finish"
+  finish: "Finish"
   remember: "Remember me on this computer"
   sign-up: "Sigin up now !"
   hello: "Hello world"

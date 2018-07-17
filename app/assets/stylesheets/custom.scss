@@ -565,3 +565,34 @@ footer ul li {
 .chooseCategory {
   margin-top: 80px;
 }
+
+.img-medium{
+  img {
+    max-width: 150px;
+    height: auto;
+  }
+}
+
+.activ-follower {
+  width: 40px;
+  height: 400px;
+  position: fixed;
+  right: 0;
+  top: 150px;
+  transition: all 1s;
+
+  &:hover {
+    width: 500px;
+  }
+
+  .mini {
+    width: 40px;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.color-gray {
+  background-color: $black-light;
+}

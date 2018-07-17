@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @lession_logs = @user.lession_logs.all.order_date
+    @lession_logs = user.lession_logs.all.order_date
     @lessions = Lession.get_name_by_lession_logs @lession_logs
     @results = LessionLog.get_result @lession_logs
   end
