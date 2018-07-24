@@ -1,43 +1,47 @@
-class LessionLogsController < ApplicationController
+class LessonLogsController < ApplicationController
   before_action :logged_in_user, only: :show
-  before_action :find_lession_log, only: %i(show update)
+  before_action :find_lesson_log, only: %i(show update)
   skip_before_action :is_admin?
 
   def create
-    @lession_log = LessionLog.create user_id: current_user[:id],
-      lession_id: params[:id]
-    lession_log.create_lession_log
-    redirect_to lession_log
+    @lesson_log = lessonLog.create user_id: current_user[:id],
+      lesson_id: params[:id]
+    esson_log.create_lesson_log
+    redirect_to lesson_log
   end
 
   def show
-    lession_log.update_attributes spend_time: @lession_log.updated_at
+    lesson_log.update_attributes spend_time: @lesson_log.updated_at
     redirect_to root_path unless current_user
-    @question_logs = lession_log.question_logs
-    @questions, @answers = LessionLog.get_lession_log @question_logs
-    return if lession_log.pass.nil?
+    @question_logs = lesson_log.question_logs
+    @questions, @answers = lessonLog.get_lesson_log @question_logs
+    return if lesson_log.pass.nil?
     @corrects = Answer.get_correct_answers @answers
   end
 
   def update
-    lession_log.update_attributes spend_time: lession_log.updated_at.to_i
+    lesson_log.update_attributes spend_time: lesson_log.updated_at.to_i
     @question_logs = if params[:questionlog]
                        params[:questionlog]
                      else
                        Settings.number.zero
                      end
-    lession_log.update_result @question_logs, params[:commit]
+    lesson_log.update_result @question_logs, params[:commit]
     redirect_to profile_path
   end
 
   private
 
-  attr_reader :lession_log
+  attr_reader :lesson_log
 
-  def find_lession_log
-    @lession_log = LessionLog.find_by id: params[:id]
-    return if lession_log
+  def find_lesson_log
+    @lesson_log = lessonLog.find_by id: params[:id]
+    return if lesson_log
     flash[:danger] = t ".danger"
     redirect_to root_path
+  end
+
+  def lesson_logs_params
+    params.required(:lesson_log).permit lessonLog::LESSONLOG_ATTRS
   end
 end

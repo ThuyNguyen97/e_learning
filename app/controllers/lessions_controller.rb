@@ -1,13 +1,13 @@
-class LessionsController < ApplicationController
-  before_action :find_lession, only: %i(edit update destroy)
+class LessonsController < ApplicationController
+  before_action :find_lesson, only: %i(edit update destroy)
 
   def new
-    @lession = Lession.new
+    @lesson = lesson.new
   end
 
   def create
-    @lession = Lession.new lession_params
-    if @lession.save
+    @lesson = lesson.new lesson_params
+    if @lesson.save
       flash[:success] = t ".success"
       redirect_to request.referrer
     else
@@ -19,13 +19,13 @@ class LessionsController < ApplicationController
   def edit; end
 
   def index
-    @lessions = Lession.all.page(params[:page]).per_page Settings.data.pages
+    @lessons = lesson.all.page(params[:page]).per_page Settings.data.pages
   end
 
   def destroy
-    if @lession.destroy
+    if @lesson.destroy
       flash[:success] = t ".delete"
-      redirect_to lessions_url
+      redirect_to lessons_url
     else
       flash[:danger] = t "danger"
       redirect_to home_path
@@ -33,9 +33,9 @@ class LessionsController < ApplicationController
   end
 
   def update
-    if @lession.update_attributes lession_params
+    if @lesson.update_attributes lesson_params
       flash[:success] = t ".success"
-      redirect_to lessions_path
+      redirect_to lessons_path
     else
       flash[:danger] = t "danger"
       redirect_to root_path
@@ -44,15 +44,15 @@ class LessionsController < ApplicationController
 
   private
 
-  attr_reader :lession
+  attr_reader :lesson
 
-  def lession_params
-    params.require(:lession).permit Lession::LESSION_ATTRS
+  def lesson_params
+    params.require(:lesson).permit lesson::lesson_ATTRS
   end
 
-  def find_lession
-    @lession = Lession.find_by id: params[:id]
-    return if @lession
+  def find_lesson
+    @lesson = lesson.find_by id: params[:id]
+    return if @lesson
     redirect_to root_path
   end
 end

@@ -4,7 +4,7 @@
       <li>
         <span class="lession">
           <% if current_user? @user %>
-            <%= link_to "Lession: #{@lessions[i]}",
+            <%= link_to "lession: #{@lessions[i]}",
               @lession_logs[i] %>
           <% else %>
             <span><%= t ".name" %><%= @lessions[i] %></span>
