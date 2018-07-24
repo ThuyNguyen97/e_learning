@@ -6,7 +6,7 @@ class LessonLogsController < ApplicationController
   def create
     @lesson_log = lessonLog.create user_id: current_user[:id],
       lesson_id: params[:id]
-    esson_log.create_lesson_log
+    lesson_log.create_lesson_log
     redirect_to lesson_log
   end
 
