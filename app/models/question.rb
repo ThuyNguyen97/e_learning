@@ -12,8 +12,8 @@ class Question < ApplicationRecord
 
   class << self
     def get_questions question_logs
-      ids = question_logs.select(:question_id)
-      questions = Question.get_ques_by_ids(ids).preload(:answers)
+      ids = question_logs.pluck :question_id
+      questions = Question.get_ques_by_ids(ids).preload :answers
       answers = []
       types = []
 

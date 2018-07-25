@@ -30,10 +30,6 @@ end
   100.times do |j|
     question = cate.questions.create!(meaning: "Lorem Ipsum #{i}#{j}",
       content: "Lorem Ipsum #{i}#{j}")
-    if question.id == 1
-      question.answers.create!(content: "-1",
-        correct: 0)
-    end
     4.times do |m|
       if m== 0
         question.answers.create!(content: "Lorem Ipsum #{i}#{j}#{m}",
