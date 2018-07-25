@@ -3,6 +3,8 @@ class QuestionLog < ApplicationRecord
   belongs_to :question
   belongs_to :answer
 
+  accepts_nested_attributes_for :answer
+
   class << self
     def create_question_logs
       ls = LessonLog.last

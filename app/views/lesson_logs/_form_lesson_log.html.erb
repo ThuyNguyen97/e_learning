@@ -1,0 +1,33 @@
+<input class="off_background" type="hidden"/>
+<%= render "time_counter" %>
+<%= form_for @lesson_log do |f| %>
+  <h2><%= @lesson_log.lesson.name %></h2>
+  <% i = 0 %>
+  <% ques = -1 %>
+  <div class="answer">
+    <% @question_logs.each_with_index do |ql, j| %>
+      <% question = ql.question %>
+      <% if ques != question.id %>
+        <br/>
+        <b><%= i += 1 %>. <%= question.content %></b>
+        <% result = decide_question @question_logs[j...j+question.answers.size] %>
+        <div class="result <%= result %>"><%= result %></div>
+        <% ques = question.id %>
+        <br/>
+      <% end %>
+      <% if @types[i - 1] < 2 %>
+        <%= render "answers/form_show_answer_single", question_log: ql %>
+      <% else %>
+        <%= render "answers/form_show_answer_multy", question_log: ql %>
+      <% end %>
+      <span class="<%= decide_answer ql %>"></span>
+      <br/>
+    <% end %>
+  </div>
+  <% if @lesson_log.pass.nil? %>
+    <%= f.submit t(".finish"), class: "btn btn-primary", id: "finish" %>
+    <% if @lesson_log.saved.nil? %>
+      <%= f.submit t(".save"), class: "btn btn-warning f-right", id: "save" %>
+    <% end %>
+  <%  end %>
+<% end %>

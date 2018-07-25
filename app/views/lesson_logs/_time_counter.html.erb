@@ -1,0 +1,17 @@
+<input class="start_time" type="hidden"/>
+<input class="id_lesson" type="hidden"
+  value="<%= @lesson_log.id %>"/>
+<input class="updated_at" type="hidden"
+  value="<%= @lesson_log.updated_at %>"/>
+<input class="created_at" type="hidden"
+  value="<%= @lesson_log.created_at %>"/>
+<input class="time_total" type="hidden"
+  value="<%= Settings.max_time %>"/>
+<input class="status_save" type="hidden"
+  value="<%= @lesson_log.saved %>"/>
+<input class="status_pass" type="hidden"
+  value="<%= @lesson_log.pass %>"/>
+<div class="time_running">
+  <span class="minutes"></span>m 
+  <span class="seconds"></span>s
+</div>

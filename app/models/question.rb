@@ -3,10 +3,13 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :question_logs, dependent: :destroy
 
+  accepts_nested_attributes_for :answers, allow_destroy: true,
+    reject_if: proc{|a| a[:content].blank?}
+
   QUESTION_ATTRS = %w(meaning content category_id).freeze
 
-  validates :meaning, presence: true
-  validates :content, presence: true
+  validates :content, presence: true,
+    length: {maximum: Settings.question.length.max_content}
 
   scope :get_ques_by_ids, ->(ids){where id: ids}
 

@@ -17,9 +17,10 @@ image:
   size: 400
   capacity: 5
 data:
-  pages: 20
+  pages: 8
 question:
-  answer_default: 1
+  length:
+    max_content: 500
 number:
   zero: 0
   one: 1
@@ -28,7 +29,16 @@ number:
   enought_to_pass: 0.8
 time:
   format1: "%H:%M:%S"
-  format: "%m/%d/%Y %H:%M"
+  format: "%m/%d/%Y - %H:%M"
 status_unlearn: "unlearned"
 status_learn: "learned"
 max_time: 60
+table:
+  status:
+    s0: "warning"
+    s1: "active"
+    s2: "success"
+    s3: "danger"
+github: "https://github.com/tatdat97dhbkhn/e_learning"
+class_css:
+  active: "active"

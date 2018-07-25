@@ -3,6 +3,8 @@ class LessonLog < ApplicationRecord
   belongs_to :lesson
   has_many :question_logs, dependent: :destroy
 
+  accepts_nested_attributes_for :question_logs
+
   scope :order_date, ->(cond){order updated_at: cond}
   scope :current, ->(current_user){where(user_id: current_user)}
   scope :pass_lesson, ->{where(pass: true)}
@@ -22,12 +24,17 @@ class LessonLog < ApplicationRecord
   end
 
   def update_pass
-    update_attributes pass:
-      if get_result > Settings.number.enought_to_pass
-        true
-      else
-        false
-      end
+    update_attributes pass: get_result > Settings.number.enought_to_pass,
+      saved: false
+  end
+
+  def update_lesson_log status
+    update_pass if get_status.eql? status.to_i
+  end
+
+  def update_time
+    update_attributes saved: false,
+      created_at: Time.at(Time.now.to_i - updated_at.to_i + created_at.to_i) if saved
   end
 
   def get_result
@@ -43,6 +50,16 @@ class LessonLog < ApplicationRecord
       end
     end
     score = (total - uncorrect.uniq.size) * Settings.number.one_float / total
+  end
+
+  def get_status
+    if !pass.nil?
+      status = 0
+    elsif saved
+      status = 1
+    else
+      status = 2
+    end
   end
 
   class << self
@@ -64,9 +81,17 @@ class LessonLog < ApplicationRecord
       lesson_logs.preload(:question_logs).each do |ll|
         question_log = ll.question_logs
         total = Question.get_ques_by_ids(question_log.select :question_id).size
-        results.push "#{(ll.get_result * total).to_i} / #{total}"
+        results.push (unless ll.pass.nil?
+                       "#{(ll.get_result * total).to_i} / #{total}"
+                     else
+                       ""
+                     end)
       end
       results
+    end
+
+    def get_lessons_user user
+      user.lesson_logs.order_date(:desc).includes :lesson
     end
   end
 

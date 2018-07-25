@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
 
   scope :correct_ans, ->{where correct: true}
 
-  ANSWER_ATTRS = %w(content question_id correct).freeze
+  ANSWER_ATTRS = %w(content correct).freeze
 
   validates :content, presence: true
 
