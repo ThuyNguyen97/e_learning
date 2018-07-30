@@ -57,4 +57,13 @@ module ApplicationHelper
       url_for lesson_log
     end
   end
+
+  def decide_path path, id, act
+    case path
+    when :category_path
+      category_path id: id, do: act
+    when :course_path
+      course_path id: id, do: act
+    end
+  end
 end

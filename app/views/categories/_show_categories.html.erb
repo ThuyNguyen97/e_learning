@@ -4,10 +4,7 @@
   <tr>
     <th><%= t ".name" %></th>
     <th><%= t ".description" %></th>
-    <th class="index_column"><%= t "edit" %></th>
-    <th class="index_column"><%= t "remove" %></th>
-    <th class="restore_column"><%= t "restore" %></th>
-    <th class="restore_column"><%= t "delete" %></th>
+    <%= render "layouts/table_header" %>
   </tr>
   <% @categories.each do |category| %>
     <tr>
@@ -16,18 +13,8 @@
       <td class="index_column">
         <%= link_to t("edit"), edit_category_path(category) %>
       </td>
-      <td class="index_column">
-        <%= render "layouts/actions_destroy", id: category.id,
-          act: t("remove") %>
-      </td>
-      <td class="restore_column">
-        <%= render "layouts/actions_destroy", id: category.id,
-          act: t("restore") %>
-      </td>
-      <td class="restore_column">
-        <%= render "layouts/actions_destroy", id: category.id,
-          act: t("delete") %>
-      </td>
+      <%= render "layouts/table_row", obj: category,
+        path: :category_path %>
     </tr>
   <% end %>
 </table>

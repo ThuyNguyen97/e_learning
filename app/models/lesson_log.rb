@@ -91,6 +91,11 @@ class LessonLog < ApplicationRecord
     def get_lessons_user user
       user.lesson_logs.order_date(:desc).includes :lesson
     end
+
+    def valid_to_destroy lesson_logs
+      return if !lesson_logs.size.zero?
+      true
+    end
   end
 
   private

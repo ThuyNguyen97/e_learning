@@ -34,6 +34,7 @@ en:
   restore: "Restore"
   remove: "Remove"
   delete: "Delete"
+  using: "Using"
   success: "Successful"
   danger: "Can't do this action"
   warning: "Done!"
@@ -165,7 +166,7 @@ en:
       image: "Image"
       update: "Save change"
     index:
-      all: "All courses"
+      all: "All categories used"
       category: "Category"
       name: "Name"
       description: "Description"
@@ -176,6 +177,10 @@ en:
     new:
       add: "Add course"
       chose: "- Choose Category -"
+    restore:
+      all: "All categories deleted"
+    show_courses:
+      add: "Add new course"
   lessons:
     create:
       success: "Created successfull"
