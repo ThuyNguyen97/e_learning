@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get "/question_logs/:id", to: "question_logs#update"
     get "/restore_questions", to: "questions#restore"
     get "/restore_categories", to: "categories#restore"
+    get "/restore_courses", to: "courses#restore"
+    get "/restore_lessons", to: "lessons#restore"
   end
 
   resources :questions

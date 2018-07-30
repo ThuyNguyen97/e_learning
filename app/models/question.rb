@@ -30,6 +30,10 @@ class Question < ApplicationRecord
     end
   end
 
+  def get_lesson_logs
+    question_logs
+  end
+
   def valid_question?
     correct_ans = answers.correct_ans.size
     return if correct_ans.zero? || correct_ans == answers.size

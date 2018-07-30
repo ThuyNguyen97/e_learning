@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :find_course, only: %i(edit update destroy)
 
   def index
-    @courses = Course.all.page(params[:page]).per_page Settings.data.pages
+    @courses = get_using_records Course, true
   end
 
   def new
@@ -23,13 +23,9 @@ class CoursesController < ApplicationController
   def edit; end
 
   def destroy
-    if @course.destroy
-      flash[:success] = t ".delete"
-      redirect_to courses_url
-    else
-      flash[:danger] = t "danger"
-      redirect_to home_path
-    end
+    flash[:warning] = course.destroy_actions course.get_lesson_logs,
+      params[:do]
+    redirect_back fallback_location: root_path
   end
 
   def update
@@ -40,6 +36,10 @@ class CoursesController < ApplicationController
       flash[:danger] = t "danger"
       redirect_to root_path
     end
+  end
+
+  def restore
+    @courses = get_using_records Course, false
   end
 
   private

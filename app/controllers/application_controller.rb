@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  def get_using_records obj, flag
+    obj.using(flag).page(params[:page]).per_page Settings.data.pages
+  end
+
   private
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale

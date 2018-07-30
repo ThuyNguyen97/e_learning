@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = get_using_category true
+    @categories = get_using_records Category, true
   end
 
   def edit; end
@@ -33,12 +33,13 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    flash[:warning] = category.destroy_actions params[:do]
+    flash[:warning] = category.destroy_actions category.get_lesson_logs,
+      params[:do]
     redirect_back fallback_location: root_path
   end
 
   def restore
-    @categories = get_using_category false
+    @categories = get_using_records Category, false
   end
 
   private

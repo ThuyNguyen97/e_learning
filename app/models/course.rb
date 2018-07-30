@@ -14,6 +14,10 @@ class Course < ApplicationRecord
     length: {maximum: Settings.course.length.max_des}
   validate  :image_size
 
+  def get_lesson_logs
+    LessonLog.where lesson_id: lessons.ids
+  end
+  
   private
 
   def image_size

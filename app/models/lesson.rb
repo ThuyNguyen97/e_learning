@@ -23,6 +23,9 @@ class Lesson < ApplicationRecord
     end
   end
 
+  def get_lesson_logs
+    lesson_logs
+  end
   private
 
   def image_size

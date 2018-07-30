@@ -1,13 +1,9 @@
 <%= form_for @lesson, html: {multipart: true} do |f| %>
   <%= render "shared/error_messages", object: f.object %>
-  <%= f.label t(".category") %>
+  <%= f.label :course %>
   <br>
-  <select name="category_id" id="category_id">
-    <option value="0"><%= t ".chose_category" %></option>
-    <%= Category.all.each do |category| %>
-      <option value="<%= category.id %>"><%= category.name %></option>
-    <% end %>
-  </select>
+  <%= f.select:course_id, Course.all.map{ |c| [c.name, c.id] },
+    include_blank: t(".chose_category") %>
   <br/><br/>
   <%= f.label :name %>
   <%= f.text_field :name, class: "form-control" %>

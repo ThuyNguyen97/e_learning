@@ -5,7 +5,8 @@
       <%= link_to t(".categories"), categories_path %>
       <%= link_to t(".courses"), courses_path %>
       <%= link_to t(".lessons"), lessons_path %>
-      <%= link_to t(".questions"), questions_path %>
+      <%= link_to t(".questions"), questions_path,
+        data: {turbolinks: false} %>
     </div>
   </center>
 </div>

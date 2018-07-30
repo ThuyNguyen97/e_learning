@@ -1,4 +1,4 @@
-<%= link_to t(".add"), new_question_path,
+<%= link_to t(".add"), new_question_path, data: {turbolinks: false},
   class: "btn btn-primary" %>
 <table>
   <tr>
@@ -13,10 +13,11 @@
       <td><%= question.category.name %></td>
       <td><%= question.meaning %></td>
       <td><%= question.content %></td>
-      <td><%= link_to t(".edit"), edit_question_path(question) %></td>
-      <td>
-        <%= link_to decide_action, question, method: :delete %>
+      <td class="index_column">
+        <%= link_to t(".edit"), edit_question_path(question) %>
       </td>
+      <%= render "layouts/table_row", obj: question,
+        path: :question_path %>
     </tr>
   <% end %>  
 </table>

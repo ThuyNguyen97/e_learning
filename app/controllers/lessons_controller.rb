@@ -19,17 +19,13 @@ class LessonsController < ApplicationController
   def edit; end
 
   def index
-    @lessons = Lesson.all.page(params[:page]).per_page Settings.data.pages
+    @lessons = get_using_records Lesson, true
   end
 
   def destroy
-    if @lesson.destroy
-      flash[:success] = t ".delete"
-      redirect_to lessons_url
-    else
-      flash[:danger] = t "danger"
-      redirect_to home_path
-    end
+    flash[:warning] = lesson.destroy_actions lesson.get_lesson_logs,
+      params[:do]
+    redirect_back fallback_location: root_path
   end
 
   def update
@@ -40,6 +36,10 @@ class LessonsController < ApplicationController
       flash[:danger] = t "danger"
       redirect_to root_path
     end
+  end
+
+  def restore
+    @lessons = get_using_records Lesson, false
   end
 
   private
